@@ -1,0 +1,101 @@
+body {
+    background-color: #f5f6fa;
+    font-family: Arial, sans-serif;
+}
+
+/* ROW CONTAINERS */
+.movie-row,
+.seat-row,
+.slot-row {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* COMMON BOX STYLE */
+.movie-column,
+.seat-column,
+.slot-column {
+    display: inline-block;
+    margin: 5px;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: #fafafa;
+}
+
+/* HOVER EFFECT */
+.movie-column:hover,
+.seat-column:hover,
+.slot-column:hover {
+    transform: translateY(-2px);
+    border-color: #888;
+}
+
+/* SELECTED STATE */
+.movie-column-selected,
+.seat-column-selected,
+.slot-column-selected {
+    background: #ff6b6b;
+    color: white;
+    border-color: #ff6b6b;
+}
+
+/* SEAT BOX */
+.seat-column {
+    min-width: 100px;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+/* INPUT */
+input {
+    width: 60px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* BUTTON */
+button {
+    border-radius: 8px;
+    font-size: 1em;
+    color: white;
+    background: linear-gradient(135deg, #2cd158, #2c6ce0);
+    padding: 8px 20px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+/* LAST BOOKING BOX */
+.last-order {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* HEADINGS */
+h1 {
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 20px;
+}
