@@ -24,7 +24,7 @@ function App() {
 
   const fetchLastBooking = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/booking");
+      const res = await fetch("https://bookmyshow-capstone-znez.onrender.com/api/booking");
       const data = await res.json();
 
       if (data.message === "no previous booking found") {
@@ -75,7 +75,7 @@ function App() {
     };
 
     try {
-      const res = await fetch("http://localhost:8080/api/booking", {
+      const res = await fetch("https://bookmyshow-capstone-znez.onrender.com/api/booking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
