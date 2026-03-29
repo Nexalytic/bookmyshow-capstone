@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config(); // ✅ ADDED
 
 const app = express();
 
@@ -14,11 +15,14 @@ app.use(cors());
 app.use(express.json());
 
 
-// 🟢 Connect to MongoDB (UNCHANGED)
+// 🟢 Connect to MongoDB (UPDATED ONLY THIS PART)
 mongoose
-  .connect("mongodb://localhost:27017/bookmyshow")
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected ✅"))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log("MongoDB Error ❌", err));
 
 
 // ======================================================
@@ -53,8 +57,6 @@ app.post("/api/booking", async (req, res) => {
   try {
     const { movie, seats, slot } = req.body;
 
-    // 🔴 BASIC VALIDATION (spec-safe)
-
     if (!movie) {
       return res.status(400).json({ message: "movie is required" });
     }
@@ -67,11 +69,9 @@ app.post("/api/booking", async (req, res) => {
       return res.status(400).json({ message: "slot is required" });
     }
 
-    // 🟢 Save booking
     const newBooking = new Booking({ movie, seats, slot });
     await newBooking.save();
 
-    // 🔥 SPEC → Must return 200 on success
     res.status(200).json({ message: "booking successful" });
 
   } catch (error) {
@@ -93,12 +93,10 @@ app.get("/api/booking", async (req, res) => {
       .findOne()
       .sort({ bookingTime: -1 });
 
-    // 🔥 SPEC → If none found
     if (!latestBooking) {
       return res.json({ message: "no previous booking found" });
     }
 
-    // 🔥 SPEC → Return only required fields
     res.json({
       movie: latestBooking.movie,
       seats: latestBooking.seats,
