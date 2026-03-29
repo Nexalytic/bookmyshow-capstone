@@ -1,38 +1,43 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config(); // ✅ ADDED
 
 const app = express();
 
 // 🔥 SPEC REQUIREMENT → PORT 8080
 const PORT = 8080;
 
-// ⭐ Enable CORS (keep — needed for frontend)
+// ⭐ Enable CORS
 app.use(cors());
 
 // Middleware
 app.use(express.json());
 
 
-// 🟢 Connect to MongoDB (UPDATED ONLY THIS PART)
+// ======================================================
+// 🔥 MongoDB Connection (FIXED)
+// ======================================================
+
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+  console.log("❌ MONGO_URI not found in environment variables");
+  process.exit(1);
+}
+
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(MONGO_URI)
   .then(() => console.log("MongoDB Connected ✅"))
   .catch((err) => console.log("MongoDB Error ❌", err));
 
 
 // ======================================================
-// 🔥 SPEC-PERFECT BOOKING SCHEMA
+// 🔥 BOOKING SCHEMA
 // ======================================================
-// Must match: { movie, seats: {A1:2,...}, slot }
 
 const bookingSchema = new mongoose.Schema({
   movie: String,
-  seats: Object, // seat-type counts (A1:2, A2:0, etc.)
+  seats: Object,
   slot: String,
   bookingTime: {
     type: Date,
@@ -43,14 +48,14 @@ const bookingSchema = new mongoose.Schema({
 const Booking = mongoose.model("Booking", bookingSchema);
 
 
-// 🟢 Test route (safe to keep)
+// 🟢 Test route
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
 
 // ======================================================
-// 🔥 SPEC-PERFECT POST /api/booking
+// 🔥 POST /api/booking
 // ======================================================
 
 app.post("/api/booking", async (req, res) => {
@@ -84,7 +89,7 @@ app.post("/api/booking", async (req, res) => {
 
 
 // ======================================================
-// 🔥 SPEC-PERFECT GET /api/booking (LAST BOOKING)
+// 🔥 GET /api/booking
 // ======================================================
 
 app.get("/api/booking", async (req, res) => {
