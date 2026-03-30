@@ -94,6 +94,11 @@ function App() {
 
         setLastBooking(bookingData);
         setSeatCounts({});
+
+        // ✅ FIX ADDED (NO OTHER CHANGES)
+        setSelectedMovie("");
+        setSelectedSlot("");
+
       } else {
         setMessage("Booking failed ❌");
       }
@@ -185,7 +190,7 @@ function App() {
       <h3>{message}</h3>
 
       {/* 📊 LAST BOOKING */}
-      <div className="last-order"> {/* ✅ UPDATED HERE */}
+      <div className="last-order">
         <h2>Last Booking Details</h2>
 
         {!lastBooking ? (
