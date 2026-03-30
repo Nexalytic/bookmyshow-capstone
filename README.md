@@ -7,7 +7,7 @@
 
 
 
-## ⚠️ **Note:**
+⚠️ **Note:**
 The backend is hosted on Render (free tier), which may enter a sleep state after inactivity.
 If the application does not respond on first attempt, please wait 30–60 seconds and refresh.
 This delay is due to cold start behavior of the hosting service.
