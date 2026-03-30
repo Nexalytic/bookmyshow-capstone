@@ -5,6 +5,7 @@
 * Frontend: https://bookmyshowcapstone.netlify.app
 * Backend API: https://bookmyshow-capstone-znez.onrender.com/api/booking
 
+---
 
 ⚠️ Note:
 The backend is hosted on Render (free tier), which may enter a sleep state after inactivity.
